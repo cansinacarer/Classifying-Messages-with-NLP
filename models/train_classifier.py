@@ -6,7 +6,7 @@ import re
 import nltk
 import pickle
 
-nltk.download(["punkt", "wordnet"])
+nltk.download(["punkt", "wordnet", "omw-1.4"])
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
