@@ -20,6 +20,14 @@ from sklearn.metrics import classification_report
 
 
 def load_data(database_filepath):
+    """
+    Parameters:
+        database_filepath: database file path
+    Returns:
+        X: message column of the df
+        Y: category columns of the df
+        category_names: category names
+    """
     # load data from database
     engine = create_engine("sqlite:///" + database_filepath)
     df = pd.read_sql("Tweets", con=engine)
@@ -31,6 +39,12 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """
+    Parameters:
+        text: text
+    Returns:
+        clean_tokens: Clean tokens
+    """
     url_regex = (
         "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
     )

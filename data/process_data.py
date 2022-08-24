@@ -4,6 +4,13 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    Parameters:
+        messages_filepath: Path to the CSV file containing messages
+        categories_filepath: Path to the CSV file containing categories
+    Returns:
+        df: read data in a df
+    """
     # Extract: Read and merge the data files into a df
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
@@ -12,6 +19,12 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    """
+    Parameters:
+        df: Combined data containing messages and categories
+    Returns:
+        df: clean data
+    """
     # 1. Import libraries and load datasets
     # Transform: create a dataframe of the 36 individual category columns
     categories = df["categories"].str.split(pat=";", expand=True)
@@ -48,8 +61,13 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    Parameters:
+        df: Cleaned data containing messages and categories
+        database_filename: Path to SQLite file
+    """
     engine = create_engine("sqlite:///" + database_filename)
-    df.to_sql("Tweets", engine, index=False)
+    df.to_sql("Tweets", engine, index=False, if_exists="replace")
 
 
 def main():
